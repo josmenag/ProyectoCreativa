@@ -13,7 +13,7 @@ pipeline {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
-                        cd api/restassured
+                        cd ../restassured
                         mvn clean test
                         '''
                 }
