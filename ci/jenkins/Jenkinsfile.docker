@@ -10,7 +10,7 @@ pipeline {
                     sh '''
                     npm install --save-dev newman
                     cd api/newman
-                    newman run examen.postman_collection.json -e herokuexamen.postman_environment.json               
+                    newman run Creativa.postman_collection.json -e ProyectoCreativa.postman_environment.json               
                     '''
                 }
             }
