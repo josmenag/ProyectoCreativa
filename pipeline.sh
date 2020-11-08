@@ -9,7 +9,7 @@ cd ../
 
 echo 'Starting RestAssured Tests'
 
-cd api/rest_assured
+cd rest_assured
 mvn clean test
 cd ../../
 
