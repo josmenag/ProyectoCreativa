@@ -1,19 +1,19 @@
 echo 'JENKINS SIMULATOR\n\n'
 
-echo 'newman tests'
+echo 'Starting Newman Tests'
 
 node --version
 cd api/newman
-newman run examen.postman_collection.json -e herokuexamen.postman_environment.json
+newman run Creativa.postman_collection.json -e ProyectoCreativa.postman_environment.json
 cd ../../
 
-echo 'rest assured tests'
+echo 'Starting RestAssured Tests'
 
 cd api/rest_assured
 mvn clean test
 cd ../../
 
-echo 'jmeter tests'
+echo 'Starting JMeter Tests...'
 
 cd load
 jmeter -n -t examen_test_plan.jmx

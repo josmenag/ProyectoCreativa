@@ -39,9 +39,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/v1/examen/status",
+					"raw": "{{baseurl}}/v1/examen/status",
 					"host": [
-						"{{base_url}}"
+						"{{baseurl}}"
 					],
 					"path": [
 						"v1",
@@ -81,9 +81,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/v1/examen/randomName",
+					"raw": "{{baseurl}}/v1/examen/randomName",
 					"host": [
-						"{{base_url}}"
+						"{{baseurl}}"
 					],
 					"path": [
 						"v1",
@@ -125,9 +125,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/v1/examen/updateName",
+					"raw": "{{baseurl}}/v1/examen/updateName",
 					"host": [
-						"{{base_url}}"
+						"{{baseurl}}"
 					],
 					"path": [
 						"v1",
@@ -177,9 +177,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/v1/examen/randomName",
+					"raw": "{{baseurl}}/v1/examen/randomName",
 					"host": [
-						"{{base_url}}"
+						"{{baseurl}}"
 					],
 					"path": [
 						"v1",
@@ -219,9 +219,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/v1/examen/sameName",
+					"raw": "{{baseurl}}/v1/examen/sameName",
 					"host": [
-						"{{base_url}}"
+						"{{baseurl}}"
 					],
 					"path": [
 						"v1",

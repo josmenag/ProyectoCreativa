@@ -29,12 +29,10 @@ pipeline {
             }              
         }
         stage('Jmeter Tests') {
-            agent {
-                docker { image 'vmarrazzo/jmeter' }
-            }
             steps {
                 sh '''
                 cd load
+                export PATH=/Users/jose.mendez/Documents/apache-jmeter-5.3/bin:$PATH
                 jmeter -n -t examen_test_plan.jmx
                 '''
             }
