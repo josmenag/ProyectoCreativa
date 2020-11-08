@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    stages {
+        stage('Newman Tests') {
+            agent {
+                docker { image 'node:12' }
+            }
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh '''
+                    npm install --save-dev newman
+                    cd api/newman
+                    newman run examen.postman_collection.json -e herokuexamen.postman_environment.json               
+                    '''
+                }
+            }
+        }
+        stage('RestAssured Tests') {
+            agent {
+                docker { image 'maven' }
+            }
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    sh '''
+                        cd api/rest_assured
+                        mvn clean test
+                        '''
+                }
+            }              
+        }
+        stage('Jmeter Tests') {
+            agent {
+                docker { image 'vmarrazzo/jmeter' }
+            }
+            steps {
+                sh '''
+                cd load
+                jmeter -n -t examen_test_plan.jmx
+                '''
+            }
+        }
+    }
+}
