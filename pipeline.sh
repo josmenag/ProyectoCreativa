@@ -5,7 +5,7 @@ echo 'Starting Newman Tests'
 node --version
 cd api/newman
 newman run Creativa.postman_collection.json -e ProyectoCreativa.postman_environment.json
-cd ../../
+cd ../
 
 echo 'Starting RestAssured Tests'
 
