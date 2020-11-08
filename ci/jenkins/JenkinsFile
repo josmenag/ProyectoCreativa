@@ -1,28 +1,29 @@
 pipeline {
     agent any
     stages {
-        stage("Newman Tests") {
+        stage('Newman Tests') {
             steps {
-                sh '''
-                cd api/newman
-                newman run Creativa.postman_collection.json -e ProyectoCreativa.postman_environment.json
-                '''
+                    sh '''
+                    cd api/newman
+                    newman run Examen.postman_collection.json -e herokuExamen.postman_environment.json               
+                    '''
             }
         }
-    stage('RestAssured Tests') {
+        stage('RestAssured Tests') {
             steps {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     sh '''
-                        cd api/rest_assured
+                        cd api/restassured
                         mvn clean test
                         '''
                 }
             }              
         }
-    stage("JMeter Tests") {
+        stage('Jmeter Tests') {
             steps {
                 sh '''
                 cd load
+                export PATH=/home/pjcalvov/jmeter/apache-jmeter-5.3/bin:$PATH
                 jmeter -n -t examen_test_plan.jmx
                 '''
             }

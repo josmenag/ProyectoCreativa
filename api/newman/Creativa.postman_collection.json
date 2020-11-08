@@ -6,29 +6,42 @@
 	},
 	"item": [
 		{
-			"name": "getStatus",
+			"name": "status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49a23e9f-b134-497c-9de6-e2f9071e8471",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Listos para el examen\");",
+							"});",
+							"",
+							"//pm.test(\"Content-Type is present\", function () {",
+							" //   pm.response.to.have.header(\"application/json; charset=utf-8\");",
+							"//});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"followAuthorizationHeader": true
+			},
 			"request": {
 				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "testpass",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "testuser",
-							"type": "string"
-						}
-					]
+					"type": "noauth"
 				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseurl}}/v1/examen/status",
+					"raw": "{{base_url}}/v1/examen/status",
 					"host": [
-						"{{baseurl}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"v1",
@@ -40,7 +53,111 @@
 			"response": []
 		},
 		{
-			"name": "getRandomName",
+			"name": "randomNameNoAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4ef73506-13ad-4463-8e95-f29d7637b5b4",
+						"exec": [
+							"",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Please login first\");",
+							"});",
+							"",
+							"pm.test(\"Status code is 401\", function () {",
+							"    pm.response.to.have.status(401);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/v1/examen/randomName",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"examen",
+						"randomName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putName",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "63519c19-a568-4f1f-9302-3f991778d2c4",
+						"exec": [
+							"pm.test(\"Status code is 406\", function () {",
+							"    pm.response.to.have.status(406);",
+							"});",
+							"",
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"Name was not provided\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/v1/examen/updateName",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"v1",
+						"examen",
+						"updateName"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "randomNameWithAuth",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "059dc606-e6bb-4d4d-a209-93d328b025fe",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {",
+							"    pm.expect(pm.response.text()).to.include('name');",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"auth": {
 					"type": "basic",
@@ -60,9 +177,9 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{baseurl}}/v1/examen/randomName",
+					"raw": "{{base_url}}/v1/examen/randomName",
 					"host": [
-						"{{baseurl}}"
+						"{{base_url}}"
 					],
 					"path": [
 						"v1",
@@ -75,110 +192,14 @@
 		},
 		{
 			"name": "sameName",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "testpass",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "testuser",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\":\"Jose\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseurl}}/v1/examen/sameName",
-					"host": [
-						"{{baseurl}}"
-					],
-					"path": [
-						"v1",
-						"examen",
-						"sameName"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UpdateName",
-			"request": {
-				"auth": {
-					"type": "basic",
-					"basic": [
-						{
-							"key": "password",
-							"value": "testpass",
-							"type": "string"
-						},
-						{
-							"key": "username",
-							"value": "testuser",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"name\":\"Edge\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{baseurl}}/v1/examen/updateName",
-					"host": [
-						"{{baseurl}}"
-					],
-					"path": [
-						"v1",
-						"examen",
-						"updateName"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "ping",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "8b9d2b6d-c13f-4a69-9210-13c05323b811",
+						"id": "8a741d11-5ca6-4a39-9006-f32c79648f53",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"pm.test(\"Verify response equals pong\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.response).to.eql(\"pong\");",
-							"});",
-							"",
-							"pm.test(\"Verify id number\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.id).to.eql(3);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -186,15 +207,26 @@
 				}
 			],
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\": \"Undertaker\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseurl}}/ping",
+					"raw": "{{base_url}}/v1/examen/sameName",
 					"host": [
-						"{{baseurl}}"
+						"{{base_url}}"
 					],
 					"path": [
-						"ping"
+						"v1",
+						"examen",
+						"sameName"
 					]
 				}
 			},
