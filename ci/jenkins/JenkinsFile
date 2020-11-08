@@ -19,7 +19,7 @@ pipeline {
                 }
             }              
         }
-    stage("Newman Tests") {
+    stage("JMeter Tests") {
             steps {
                 sh '''
                 cd load
